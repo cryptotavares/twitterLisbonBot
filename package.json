@@ -1,0 +1,13 @@
+{
+  "name": "twitterlisbonbot",
+  "private": true,
+  "version": "1.0.0",
+  "description": "twitter bot for Lisbon",
+  "dependencies": {
+    "natural": "^0.4.0",
+    "twit": "^2.2.4"
+  },
+  "main": "index.js",
+  "author": "",
+  "license": "ISC"
+}
