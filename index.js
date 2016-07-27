@@ -55,24 +55,24 @@ stream.on('tweet', function (tweet) {
 
   // RegExes
   var greetingRE = /^hey$/;
-  var musicRE = /^clubs$/;
+  var musicRE = /^discotecas$/;
   var culturaRE = /^cultura$/;
   var filmRE = /^cinema$/;
   var foodRE = /^restaurantes$/;
   var partyRE = /^party$/;
 
   if (matchRE(culturaRE, text)) {
-    search("interactive", asker);
+    search("cultura", asker);
   } else if (matchRE(filmRE, text)) {
-    search("film", asker);
+    search("cinema", asker);
   } else if (matchRE(musicRE, text)) {
-    search("music", asker);
+    search("discotecas", asker);
   } else if (matchRE(partyRE, text)) {
-    search("drink", asker);
+    search("party", asker);
   } else if (matchRE(foodRE, text)) {
-    search("food", asker);
+    search("restaurantes", asker);
   } else if (matchRE(greetingRE, text)) {
-    post("Hey " + "@" + asker + " . So, I've heard about some Lisbon cool topics. Or you know, whatever. [party, cultura, cinema, restuarantes, clubs]");
+    post("Hey " + "@" + asker + " ! Queres saber o que se passa em Lisboa? Escolhe um tópico: party, cultura, cinema, restuarantes, discotecas.");
   } else {
   }
 
