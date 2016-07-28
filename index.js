@@ -17,20 +17,18 @@ function post (content) {
 
 function search (query, asker) {
   var search = "Lisboa " + query + " filter:links";
-  twitter.get('search/tweets', { q: search, count: 10 }, function(err, data, response) {
+  twitter.get('search/tweets', { q: search, count: 100 }, function(err, data, response) {
 
-    var resultLink; 
+    var totalLink = []; 
+    var aux = 0;
 
-    if (data.statuses[0].entities.urls.length > 0) {
-      resultLink = data.statuses[0].entities.urls[0].url;
-    } else {
-      for (var i=0;i < data.statuses.length;i++) {
-        if (data.statuses[i].entities.urls.length > 0) {
-          resultLink = data.statuses[i].entities.urls[0].url;
-          i = data.statuses.length;
-        }
+    for (var i=0;i < data.statuses.length;i++) {
+      if (data.statuses[i].entities.urls.length > 0) {
+        totalLink.push(data.statuses[i].entities.urls[0].url);
       }
-    };    
+    };
+
+    var resultLink = totalLink[Math.floor(Math.random() * totalLink.length)];
 
     var result = "@" + asker + " Ok. Eu percebo perfeitamente... " + query + " é topo. Que tal isto? " + resultLink;
     post(result);
@@ -55,7 +53,6 @@ stream.on('tweet', function (tweet) {
 
   // RegExes
   var greetingRE = /^hey$/;
-  var musicRE = /^discotecas$/;
   var culturaRE = /^cultura$/;
   var filmRE = /^cinema$/;
   var foodRE = /^restaurantes$/;
@@ -65,14 +62,12 @@ stream.on('tweet', function (tweet) {
     search("cultura", asker);
   } else if (matchRE(filmRE, text)) {
     search("cinema", asker);
-  } else if (matchRE(musicRE, text)) {
-    search("discotecas", asker);
   } else if (matchRE(partyRE, text)) {
     search("party", asker);
   } else if (matchRE(foodRE, text)) {
     search("restaurantes", asker);
   } else if (matchRE(greetingRE, text)) {
-    post("Hey " + "@" + asker + " ! Queres saber o que se passa em Lisboa? Escolhe um tópico: party, cultura, cinema, restuarantes, discotecas.");
+    post("Hey " + "@" + asker + " ! Queres saber o que se passa em Lisboa? Escolhe um tópico: party, cultura, cinema, restaurantes.");
   } else {
   }
 
